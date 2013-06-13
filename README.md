@@ -1,2 +1,3 @@
-moviedb_ep
+moviesdb_ep
 ==========
+Movies database
