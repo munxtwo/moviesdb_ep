@@ -9,10 +9,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.moviesdb.dao.MovieDao;
 import com.moviesdb.domain.Movie;
 
+@Service
 @Path("/movies")
 public class MoviesResource {
 
@@ -25,7 +27,7 @@ public class MoviesResource {
 		return movieDao.findAllMovies();
 	}
 	
-	@GET @Path("id/{id}")
+	@GET @Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Movie findById(@PathParam("id") String id) {
 		return movieDao.findMovieByPrimaryKey(Integer.parseInt(id));
@@ -34,10 +36,6 @@ public class MoviesResource {
 	@GET @Path("status/{status}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Movie> findByStatus(@PathParam("status") String status) {
-		List<Movie> list = movieDao.findByStatus(status);
-		for (Movie  m:list) {
-			System.out.println(m.toString());
-		}
 		return movieDao.findByStatus(status);
 	}
 	

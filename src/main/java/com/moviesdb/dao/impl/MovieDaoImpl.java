@@ -59,7 +59,6 @@ public class MovieDaoImpl extends AbstractJpaDao<Movie> implements MovieDao {
 	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public List<Movie> findByStatus(String status) throws DataAccessException {
 		final Query query = createNamedQuery("findByStatus", -1, -1, status);
-		System.out.println("Debug:" + query.getResultList().size());
 		return query.getResultList();
 	}
 }
