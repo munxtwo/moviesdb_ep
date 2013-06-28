@@ -9,12 +9,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.moviesdb.dao.MovieDao;
 import com.moviesdb.domain.Movie;
 
-@Service
+@Component
 @Path("/movies")
 public class MoviesResource {
 
