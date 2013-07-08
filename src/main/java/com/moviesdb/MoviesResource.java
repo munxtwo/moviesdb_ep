@@ -2,7 +2,10 @@ package com.moviesdb;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -39,4 +42,12 @@ public class MoviesResource {
 		return movieDao.findByStatus(status);
 	}
 	
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public void create(@FormParam("name") String name, @FormParam("releaseYear") Integer releaseYear) {
+		Movie movie = new Movie();
+		movie.setName(name);
+		movie.setReleaseYear(releaseYear);
+		movieDao.store(movie);
+	}
 }
