@@ -31,7 +31,7 @@ window.NewMovieFormView = Backbone.View.extend({
     
     submitForm: function() {
     	var name = $("#name").val();
-    	var year = $("#year").val();
+    	var year = $("#year").val().trim();
     	var status = $("#selectStatus").val();
     	var type = $("#selectType").val();
     	
