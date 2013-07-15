@@ -18,7 +18,7 @@ import com.moviesdb.dao.GenreDao;
 import com.moviesdb.domain.Genre;
 
 @Scope("singleton")
-@Repository("MovieDao")
+@Repository("GenreDao")
 @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 public class GenreDaoImpl extends AbstractJpaDao<Genre> implements GenreDao {
 
