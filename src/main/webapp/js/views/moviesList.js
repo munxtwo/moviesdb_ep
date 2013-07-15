@@ -7,6 +7,7 @@ window.MoviesListView = Backbone.View.extend({
 	events: {
 		"click .year": "filterByYear",
 		"click .all": "render",
+		"click #newEntry": "createNewEntry",
 	},
 
 	initialize: function() {
@@ -47,6 +48,10 @@ window.MoviesListView = Backbone.View.extend({
         	$('#columnBody', this.el).append(new MoviesListItemView({model:movie}).render().el);
         }, this);
         
+	},
+	
+	createNewEntry: function() {
+		app.navigate("movies/create/newEntry", {trigger: true});
 	},
 
 });

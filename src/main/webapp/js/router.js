@@ -4,6 +4,7 @@ var appRouter = Backbone.Router.extend({
 		"": "home",
 		"movies": "allmovies",
 		"movies/:id": "movieDetails",
+		"movies/create/newEntry": "newEntry",
 	},
 	
 	initialize: function () {
@@ -44,7 +45,7 @@ var appRouter = Backbone.Router.extend({
     	collection.fetch({
     		success: function(data) {
                 var years = _.uniq(collection.pluck("releaseYear"));
-                that.title = "List Of All Movies";
+                that.title = "List Of Movies";
     			$("#content").html(new MoviesListView({model: data, collection: collection, 
     				sidebar: "show", years: years, title: that.title}).render().el);
     		}
@@ -57,16 +58,20 @@ var appRouter = Backbone.Router.extend({
     	 var movie = new Movie({id: id});
          movie.fetch({
              success: function (data) {
-                 // Note that we could also 'recycle' the same instance of EmployeeFullView
-                 // instead of creating new instances
                  $('#content').html(new MovieView({model: data}).render().el);
              }
          });
     },
     
+    newEntry: function() {
+    	$("#content").html(new NewMovieFormView({model: new Movie()}).render().el);
+        this.headerView.select('');
+    },
+    
 });
 
-templateLoader.load(["HomeView", "HeaderView", "MoviesListView", "MoviesListHeaderItemView", "MoviesListItemView", "MovieView"],
+templateLoader.load(["HomeView", "HeaderView", "MoviesListView", "MoviesListHeaderItemView", "MoviesListItemView", 
+                     "MovieView", "NewMovieFormView"],
 	    function () {
 	        app = new appRouter();
 	        Backbone.history.start();

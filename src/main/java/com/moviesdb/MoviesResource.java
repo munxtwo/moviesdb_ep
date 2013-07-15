@@ -44,10 +44,16 @@ public class MoviesResource {
 	
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public void create(@FormParam("name") String name, @FormParam("releaseYear") Integer releaseYear) {
-		Movie movie = new Movie();
-		movie.setName(name);
-		movie.setReleaseYear(releaseYear);
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public void create(Movie movie) {
 		movieDao.store(movie);
 	}
+	
+//	public void create(@FormParam("name") String name, @FormParam("releaseYear") Integer releaseYear,
+//			@FormParam("status") String status, @FormParam("type") String type) {
+//		Movie movie = new Movie();
+//		movie.setName(name);
+//		movie.setReleaseYear(releaseYear);
+//		movie.setStatus(status);
+//		movie.setType(type);
 }
