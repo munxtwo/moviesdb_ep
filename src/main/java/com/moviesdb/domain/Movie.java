@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,6 +36,12 @@ public class Movie {
 	
 	@Column(name = "mtype", nullable = false)
 	private String type;
+	
+	@ManyToOne
+	@JoinColumns( {
+		@JoinColumn(name = "genre_id", referencedColumnName = "id")
+	})
+	private Genre genre;
 	
 	public String getName() {
 		return name;
@@ -72,6 +81,14 @@ public class Movie {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	public Genre getGenre() {
+		return genre;
 	}
 
 	public String toString() {

@@ -5,7 +5,8 @@ window.MoviesListHeaders = Backbone.Model.extend({
 	              "Name",
 	              "Year",
 	              "Status",
-	              "Type"
+	              "Type",
+	              "Genre"
 		]});
 	}
 });
@@ -20,6 +21,7 @@ window.Movie = Backbone.Model.extend({
 		"releaseYear": "",
 		"status": "",
 		"type": "",
+		"genre": ""
 	}
 });
 
@@ -39,6 +41,6 @@ window.MoviesCollection = Backbone.Collection.extend({
 	
 	url: function () {
 		return this.url;
-	},
+	}
 	
 });

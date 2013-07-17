@@ -1,11 +1,14 @@
 package com.moviesdb.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +24,10 @@ public class Genre {
 	private long id;
 	
 	@Column(name = "genre_name", nullable = false)
-	private String genre_name;
+	private String name;
+//	
+//	@OneToMany(mappedBy = "genre")
+//	private Set<Movie> movies;
 
 	public long getId() {
 		return id;
@@ -31,12 +37,20 @@ public class Genre {
 		this.id = id;
 	}
 
-	public String getGenre_name() {
-		return genre_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setGenre_name(String genre_name) {
-		this.genre_name = genre_name;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+//	public void setMovies(Set<Movie> movies) {
+//		this.movies = movies;
+//	}
+//
+//	public Set<Movie> getMovies() {
+//		return movies;
+//	}
 
 }

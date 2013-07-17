@@ -9,3 +9,5 @@ CREATE TABLE IF NOT EXISTS TGENRE (
 -- Insert values
 INSERT INTO TGENRE (genre_name) VALUES
 ("Comedy"), ("Horror"), ("Documentary"), ("Romance"), ("Action"), ("Drama"), ("Musical");
+
+ALTER TABLE TMOVIES	ADD column genre_id int;

@@ -3,6 +3,10 @@ package com.moviesdb.dao.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.moviesdb.dao.JpaDao;
 
 public abstract class AbstractJpaDao<T> implements JpaDao<T> {
@@ -41,11 +45,13 @@ public abstract class AbstractJpaDao<T> implements JpaDao<T> {
 		return (T) query.getSingleResult();
 	}
 	
+	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public T store(final T objectToPersist) {
 		T result = getEntityManager().merge(objectToPersist);
 		return result;
 	}
 	
+	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public void remove(final T objectToDelete) {
 		getEntityManager().remove(objectToDelete);
 	}

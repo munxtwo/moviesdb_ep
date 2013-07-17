@@ -7,6 +7,7 @@
 		<description>generated-persistence-unit</description>
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.moviesdb.domain.Movie</class>
+		<class>com.moviesdb.domain.Genre</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
 	
