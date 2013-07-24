@@ -27,5 +27,11 @@ public interface GenreDao {
 	 */
 	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public abstract List<Genre> findAllGenres() throws DataAccessException;
+	
+	/* (non-Javadoc)
+	 * @see com.moviesdb.dao.impl.GenreDao#findGenreByName()
+	 */
+	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+	public abstract Genre findGenreByName(String genreName) throws DataAccessException;
 
 }

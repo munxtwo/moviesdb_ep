@@ -19,12 +19,21 @@ window.NewMovieFormView = Backbone.View.extend({
         });
         
         _.each(this.statusList.models, function(status) {
-			$('#selectStatus', this.el).append(new SelectListView({model:status}).render().el);
+			$('#selectStatus', this.el).append(new SelectListView({model:status, optionParam: "option"}).render().el);
 		}, this);
         
         _.each(this.typeList.models, function(type) {
-			$('#selectType', this.el).append(new SelectListView({model:type}).render().el);
+			$('#selectType', this.el).append(new SelectListView({model:type, optionParam: "option"}).render().el);
 		}, this);
+        
+        var genreCollection = new GenreCollection();
+    	genreCollection.fetch({
+    		success: function(data) {
+    			_.each(data.models, function(genre) {
+    				$('#selectGenre', this.el).append(new SelectListView({model:genre, optionParam: "name"}).render().el);
+    			}, this);
+    		}
+    	});
         
         return this;
     },
@@ -34,8 +43,10 @@ window.NewMovieFormView = Backbone.View.extend({
     	var year = $("#year").val().trim();
     	var status = $("#selectStatus").val();
     	var type = $("#selectType").val();
+    	var genre = $("#selectGenre").val();
     	
-    	if ((name == "") || (year == "") || (status == "Select Status ...") || (type == "Select Type ...")) {
+    	if ((name == "") || (year == "") || (status == "Select Status ...") || (type == "Select Type ...") 
+    			|| (genre == "Select Genre ...")) {
     		alert("Fill in all fields!");
     	}
     	else {
@@ -44,13 +55,18 @@ window.NewMovieFormView = Backbone.View.extend({
     			"releaseYear": year,
     			"status": status,
     			"type": type,
+    			"genreName": genre
     		});
 //    		alert(this.model.get("name") + ", " + this.model.get("releaseYear") + ", " + this.model.get("status") + ", " + this.model.get("type"));
     	}
     	if (this.model.isNew()) {
     		this.collection = new MoviesCollection();
     		this.collection.fetch();
-    		this.collection.create(this.model);
+    		this.collection.create(this.model, {
+    			success: function() {
+    				app.navigate("movies", {trigger: true});
+    			}
+    		});
     	}
     },
 	
@@ -60,9 +76,13 @@ window.SelectListView = Backbone.View.extend({
 	
 	tagName: "option",
 	
+	initialize: function() {
+		this.optionParam = this.options.optionParam;
+	},
+	
 	render: function() {
-		$(this.el).attr('value', this.model.get("option"))
-			.html(_.template("<%=option%>", {option:this.model.get("option")}));
+		$(this.el).attr('value', this.model.get(this.optionParam))
+			.html(_.template("<%=option%>", {option:this.model.get(this.optionParam)}));
 	    return this;
 	  }
 	

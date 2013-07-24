@@ -21,7 +21,7 @@ window.Movie = Backbone.Model.extend({
 		"releaseYear": "",
 		"status": "",
 		"type": "",
-		"genre": ""
+		"genreName": ""
 	}
 });
 

@@ -54,5 +54,14 @@ public class GenreDaoImpl extends AbstractJpaDao<Genre> implements GenreDao {
 		final Query query = createNamedQuery("findAllGenres", -1, -1);
 		return query.getResultList();
 	}
+	
+	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+	public Genre findGenreByName(String genreName) throws DataAccessException {
+		try {
+			return executeQueryByNameSingleResult("findGenreByName", genreName);
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
 
 }

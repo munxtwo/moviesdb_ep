@@ -8,13 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TGenre")
 @NamedQueries({
-	
+	@NamedQuery(name = "findAllGenres", query = "select myGenre from Genre myGenre order by myGenre.id"),
+	@NamedQuery(name = "findGenreByName", query = "select myGenre from Genre myGenre where genre_name = ?1"),
 })
 public class Genre {
 	
