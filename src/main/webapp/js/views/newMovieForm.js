@@ -7,6 +7,7 @@ window.NewMovieFormView = Backbone.View.extend({
 	initialize: function() {
 		this.statusList = StatusCollection;
 		this.typeList = TypeCollection;
+		$("#alerts").hide();
 	},
 	
     render: function() {
@@ -47,7 +48,8 @@ window.NewMovieFormView = Backbone.View.extend({
     	
     	if ((name == "") || (year == "") || (status == "Select Status ...") || (type == "Select Type ...") 
     			|| (genre == "Select Genre ...")) {
-    		alert("Fill in all fields!");
+    		$("#alerts").addClass("alert-danger").html(_.template("<%= alertMessage %>", 
+    				{alertMessage:"Fill in all fields!"})).show();
     	}
     	else {
     		this.model.set({
@@ -58,15 +60,21 @@ window.NewMovieFormView = Backbone.View.extend({
     			"genreName": genre
     		});
 //    		alert(this.model.get("name") + ", " + this.model.get("releaseYear") + ", " + this.model.get("status") + ", " + this.model.get("type"));
-    	}
-    	if (this.model.isNew()) {
-    		this.collection = new MoviesCollection();
-    		this.collection.fetch();
-    		this.collection.create(this.model, {
-    			success: function() {
-    				app.navigate("movies", {trigger: true});
-    			}
-    		});
+    		if (this.model.isNew()) {
+    			this.collection = new MoviesCollection();
+    			this.collection.fetch();
+    			this.collection.create(this.model, {
+    				success: function() {
+    					app.navigate("movies", {trigger: true});
+    					$("#alerts").addClass("alert-success").html(_.template("<%= alertMessage %>", 
+    		    				{alertMessage:"Successfully created new entry: " + name + "!"})).show();
+    				},
+    				failure: function() {
+    					$("#alerts").addClass("alert-danger").html(_.template("<%= alertMessage %>", 
+    		    				{alertMessage:"Failed to create entry: " + name + "!"})).show();
+    				}
+    			});
+    		}
     	}
     },
 	

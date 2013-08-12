@@ -13,6 +13,10 @@ window.MoviesListView = Backbone.View.extend({
 	initialize: function() {
 		this.columnHeaders = new MoviesListHeaders();
 		this.title = this.options.title;
+		var alerts = document.getElementById("alerts");
+		if (alerts.className.indexOf("alert-success") == -1) {
+			$("#alerts").hide();
+		}
 	},
 	
 	render: function() {
