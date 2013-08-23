@@ -64,7 +64,7 @@ var appRouter = Backbone.Router.extend({
     },
     
     newEntry: function() {
-    	$("#content").html(new NewMovieFormView({model: new Movie()}).render().el);
+    	$("#content").html(new NewMovieFormView({model: new Movie(), title: "Add New Movie"}).render().el);
         this.headerView.select('');
     },
     

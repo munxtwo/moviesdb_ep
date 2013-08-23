@@ -1,23 +1,46 @@
-<h1>Add New Movie</h1>
+<h1><%= movieFormTitle %></h1>
 <form>
 	<fieldset>
-		<label>Name</label>
-		<input id="name" type="text" placeholder="Enter movie name ...">
-		<label>Year</label>
-		<div class="input-append datepicker date" id="datepicker" data-date="01-01-2013" data-date-format="yyyy">
-			<input id="year" type="text" placeholder="Select release year ...">
-			<span class="add-on"><i class="icon-th"></i></span>
-		</div>
-		<label>Status</label>
-		<select id="selectStatus">
-		</select>
-		<label>Type</label>
-		<select id="selectType">
-		</select>
-		<label>Genre</label>
-		<select id="selectGenre">
-			<option value="Select Genre ...">Select Genre ...</option>
-		</select>
+	<table id="newMovieFormTable" class="table table-striped" style="border:1px solid black;text-align:center">
+		<tbody>
+			<tr>
+				<td>Name</td>
+				<td>
+					<input id="name" type="text" placeholder="Enter movie name ...">
+				</td>
+			</tr>
+			<tr>
+				<td>Year</td>
+				<td>
+					<div class="input-append datepicker date" id="datepicker" data-date="01-01-2013" data-date-format="yyyy">
+						<input id="year" type="text" placeholder="Select release year ...">
+						<span class="add-on"><i class="icon-th"></i></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Type</td>
+				<td>
+					<select id="selectType"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td>
+					<select id="selectStatus"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>Genre</td>
+				<td>
+					<select id="selectGenre">
+						<option value="Select Genre ...">Select Genre ...</option>
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	</fieldset>
-	<button id="submitForm" type="submit" class="btn btn-primary">Submit</button>
+	<button id="submitForm" type="submit" class="btn btn-primary btn-large">Save</button>
+	<button id="cancelButton" class="btn btn-primary btn-large">Cancel</button>
 </form>

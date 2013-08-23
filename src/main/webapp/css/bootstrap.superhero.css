@@ -1,4 +1,21 @@
 @import url('//fonts.googleapis.com/css?family=Oswald|Noticia+Text');
+/*
+ * My own additional styles
+ */
+ option, 
+ .datepicker {
+ 	color: #e36b23
+}
+.table td a {
+	color: #ffffff
+}
+.table h4 {
+	color: #FFA661;
+	text-align: center
+}
+.table#newMovieFormTable td:first-child {
+	text-align: center
+}
 /*!
  * Bootstrap v2.2.2
  *
@@ -1780,11 +1797,11 @@ table {
 }
 .table-striped tbody > tr:nth-child(odd) > td,
 .table-striped tbody > tr:nth-child(odd) > th {
-  background-color: #45515f;
+  background-color: #4E6379;
 }
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
-  background-color: #505e6e;
+  background-color: #758292;
 }
 table td[class*="span"],
 table th[class*="span"],

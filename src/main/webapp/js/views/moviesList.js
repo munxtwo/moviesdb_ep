@@ -36,6 +36,7 @@ window.MoviesListView = Backbone.View.extend({
 	},
 	  
 	filterByYear: function() {
+		$("#alerts").hide();
 		var id = arguments[0].currentTarget.id;
 		this.title = "List of Movies in " + id; 
 		$("h1").html(this.title);

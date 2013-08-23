@@ -2,6 +2,7 @@ window.NewMovieFormView = Backbone.View.extend({
 	
 	events: {
 		"click #submitForm": "submitForm",
+		"click #cancelButton": "cancelForm"
 	},
 	
 	initialize: function() {
@@ -11,7 +12,7 @@ window.NewMovieFormView = Backbone.View.extend({
 	},
 	
     render: function() {
-        $(this.el).html(this.template({model: this.model}));
+        $(this.el).html(this.template({model: this.model, movieFormTitle: this.options.title}));
         
         $('#datepicker', this.el).datepicker({
         	format: " yyyy",
@@ -28,15 +29,27 @@ window.NewMovieFormView = Backbone.View.extend({
 		}, this);
         
         var genreCollection = new GenreCollection();
+        var that = this;
     	genreCollection.fetch({
     		success: function(data) {
     			_.each(data.models, function(genre) {
     				$('#selectGenre', this.el).append(new SelectListView({model:genre, optionParam: "name"}).render().el);
     			}, this);
+    			if (!that.model.isNew()) {
+    				that.populateExistingValues();
+    			}
     		}
     	});
         
         return this;
+    },
+    
+    populateExistingValues: function() {
+    	document.getElementById("name").value = this.model.get("name");
+    	document.getElementById("year").value = this.model.get("releaseYear");
+    	document.getElementById("selectStatus").value = this.model.get("status");
+    	document.getElementById("selectType").value = this.model.get("type");
+    	document.getElementById("selectGenre").value = this.model.get("genreName");
     },
     
     submitForm: function() {
@@ -59,7 +72,6 @@ window.NewMovieFormView = Backbone.View.extend({
     			"type": type,
     			"genreName": genre
     		});
-//    		alert(this.model.get("name") + ", " + this.model.get("releaseYear") + ", " + this.model.get("status") + ", " + this.model.get("type"));
     		if (this.model.isNew()) {
     			this.collection = new MoviesCollection();
     			this.collection.fetch();
@@ -71,12 +83,23 @@ window.NewMovieFormView = Backbone.View.extend({
     				},
     				failure: function() {
     					$("#alerts").addClass("alert-danger").html(_.template("<%= alertMessage %>", 
-    		    				{alertMessage:"Failed to create entry: " + name + "!"})).show();
+    		    				{alertMessage:"ERROR: Failed to create entry: " + name + "!"})).show();
     				}
     			});
+    		} else {
+    			this.model.save();
+    			app.movieDetails(this.model.id);
     		}
     	}
     },
+    
+    cancelForm: function() {
+    	if (this.options.title == "Edit Movie") {
+    		app.movieDetails(this.model.id);
+    	} else if (this.options.title == "Add New Movie") {
+    		app.navigate("movies", {trigger: true});
+    	}
+    }
 	
 });
 
