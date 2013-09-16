@@ -17,7 +17,7 @@ window.NewMovieFormView = Backbone.View.extend({
         $('#datepicker', this.el).datepicker({
         	format: " yyyy",
         	viewMode: "years",
-        	minViewMode: "years",
+        	minViewMode: "years"
         });
         
         _.each(this.statusList.models, function(status) {
@@ -88,7 +88,8 @@ window.NewMovieFormView = Backbone.View.extend({
     			});
     		} else {
     			this.model.save();
-    			app.movieDetails(this.model.id);
+    			app.navigate("movies/" + this.model.id, {trigger: true});
+//    			app.movieDetails(this.model.id);
     		}
     	}
     },
